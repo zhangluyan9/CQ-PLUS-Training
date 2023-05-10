@@ -15,7 +15,7 @@ CQ Trainig is trained in stages as the figure shown in Figure5 in paper. The det
 Z. Yan, J. Zhou, and W.F. Wong, "Near Lossless Transfer Learning for Spiking Neural Networks." Accepted by Thirty-Fifth AAAI Conference on Artificial Intelligence (AAAI-21). Virtual conference. Feb 2021.
 
 ## Pretrain Weight:
-https://drive.google.com/file/d/1l6jVBJnmbE52tZKy7wGb7Y_z5ABwy-US/view?usp=share_link
+https://drive.google.com/file/d/1b1GB2wfab0Ezi7FvqnK4QdZUyj4qyA5N/view?usp=sharing
 
 ## Acknowledgement
 This simulator is inspired by and makes use of the code from [slayerPytorch](https://github.com/bamsumit/slayerPytorch)
