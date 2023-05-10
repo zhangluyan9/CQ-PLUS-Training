@@ -5,9 +5,6 @@ The repository includes C++ and CUDA code that has to be compiled and installed 
 
 `python setup.py install`
 
-## Documentation
-Please refer to the [wiki](https://github.com/zhoujuncc1/shenjingcat/wiki)
-
 ## Training Workflow
 CQ Trainig is trained in stages as the figure shown in Figure5 in paper. The details of training methods is discussed in Section4.1.
 
