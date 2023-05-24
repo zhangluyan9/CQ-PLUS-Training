@@ -21,25 +21,45 @@ def load_model(src, dst, quantize_bit=32):
             reshape_dict[k] = nn.Parameter(quantize_to_bit(v.reshape(dst_dict[k].shape), quantize_bit))
     dst.load_state_dict(reshape_dict, strict=False)
 
+def quantize_to_bit_(x, nbit):
+    if nbit == 32:
+        return x
+    x = (1-2.0**(1-nbit))*x
+    return torch.mul(torch.round(torch.div(x, 2.0**(1-nbit))), 2.0**(1-nbit))
+
 def normalize_weight(model, threshold_scale = 1.0, quantize_bit=32):
+    
     factor=0
+
+    pool_l=1
+    pool_li = []
     for m in model.modules():
+        pool_l+=1
+        if  isinstance(m, _poolLayer):
+            pool_li.append(pool_l+1)
+    
+    i=1
+    for m in model.modules():
+        i+=1
+
         if isinstance(m, nn.Conv3d) and not isinstance(m, _poolLayer):
-            print("Normalize: " + str(m))
+            #print("Normalize: " + str(m))
+            #print(m.weight.shape)
             factor = torch.max(torch.abs(m.weight))
             
             if m.bias is not None and torch.max(torch.abs(m.bias)) > factor:
                 factor = torch.max(torch.abs(m.bias))
-
+            #print(factor)
             m.weight /= factor
-            m.weight = nn.Parameter(quantize_to_bit(m.weight, quantize_bit))
+            m.weight = nn.Parameter(quantize_to_bit_(m.weight, quantize_bit))
             if m.bias is not None:
                 m.bias/=factor
-                m.bias = nn.Parameter(quantize_to_bit(m.bias, quantize_bit))
-                
-        elif isinstance(m, _spikeLayer):
-            m.theta = m.theta/factor*threshold_scale
-
+                m.bias = nn.Parameter(quantize_to_bit_(m.bias, quantize_bit))
+        
+        elif isinstance(m, _spikeLayer) and not isinstance(m, _poolLayer) and i not in pool_li:
+            m.theta = (1-2.0**(1-quantize_bit))*m.theta/factor*threshold_scale
+            #m.theta = m.theta/factor*threshold_scale
+            
 def max_weight(model):
     factor=0
     for m in model.modules():
