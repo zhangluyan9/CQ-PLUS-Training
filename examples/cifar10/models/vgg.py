@@ -126,7 +126,7 @@ class CatVGG(nn.Module):
         in_channels = 3
         for x in cfg:
             if x == 'M':
-                #layers += [self.snn.pool(2)]
+                #layers += [self.snn.pool(2)] The threshold is set as 0.999 to eliminate the problem of Floating-Point Numbers May Lose Precision
                 layers += [self.snn.pool(2),self.snn.spikeLayer(0.999)]
             else:
                 #layers += [self.snn.conv(in_channels, x, kernelSize=3, padding=1, bias=self.bias),
