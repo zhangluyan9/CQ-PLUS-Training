@@ -5,10 +5,9 @@ The repository includes C++ and CUDA code that has to be compiled and installed 
 
 `python setup.py install`
 
-## Training Workflow
-CQ Trainig is trained in stages as the figure shown in Figure5 in paper. The details of training methods is discussed in Section4.1.
-
 ## Publications:
+Z. Yan, J. Zhou, and W.F. Wong, " CQ+ Training: Minimizing Accuracy Loss in Conversion from Convolutional Neural Networks to Spiking Neural Networks." Accepted by IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI).
+
 Z. Yan, J. Zhou, and W.F. Wong, "Near Lossless Transfer Learning for Spiking Neural Networks." Accepted by Thirty-Fifth AAAI Conference on Artificial Intelligence (AAAI-21). Virtual conference. Feb 2021.
 
 ## Pretrain Weight:
